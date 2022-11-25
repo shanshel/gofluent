@@ -6,6 +6,7 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"strings"
 
 	"gopkg.in/yaml.v3"
 )
@@ -90,6 +91,8 @@ func (l *Lang) Switch(lang string) error {
 
 func (l *Lang) Get(section, key string, params ...interface{}) string {
 
+	key = strings.ToLower(key)
+	section = strings.ToLower(section)
 	//1.Use Default if Active Lang is empty
 	if activeLang == "" {
 		activeLang = l.defaultLang
