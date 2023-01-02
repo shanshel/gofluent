@@ -46,6 +46,7 @@ func New(dirPath, defaultLang string, preload bool) (*lang, error) {
 
 	}
 
+	//switch
 	err = l.Switch(defaultLang)
 
 	if err != nil {
