@@ -11,7 +11,7 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-type lang struct {
+type Lang struct {
 	dirPath     string
 	defaultLang string
 }
@@ -19,12 +19,12 @@ type lang struct {
 var languages map[string]map[interface{}]interface{} = make(map[string]map[interface{}]interface{})
 var activeLang string
 
-func New(dirPath, defaultLang string, preload bool) (*lang, error) {
+func New(dirPath, defaultLang string, preload bool) (*Lang, error) {
 	_, err := os.Stat(dirPath)
 	if err != nil {
 		return nil, err
 	}
-	l := &lang{}
+	l := &Lang{}
 	l.dirPath = dirPath
 	l.defaultLang = defaultLang
 
@@ -56,7 +56,7 @@ func New(dirPath, defaultLang string, preload bool) (*lang, error) {
 	return l, nil
 }
 
-func (l *lang) Switch(lang string) error {
+func (l *Lang) Switch(lang string) error {
 
 	if _, isLoaded := languages[lang]; isLoaded {
 		activeLang = lang
@@ -90,7 +90,7 @@ func (l *lang) Switch(lang string) error {
 	return nil
 }
 
-func (l *lang) Get(section, key string, params ...interface{}) string {
+func (l *Lang) Get(section, key string, params ...interface{}) string {
 
 	key = strings.ToLower(key)
 	section = strings.ToLower(section)
